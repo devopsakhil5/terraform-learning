@@ -1,3 +1,3 @@
 
-REGION="us-east-1"
+REGION = "us-east-1"
 
