@@ -80,20 +80,14 @@ resource "aws_security_group" "sg" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic and all outbound traffic"
   vpc_id      = aws_vpc.myvpc.id
-  
+
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Allows SSH from any IP address
+    cidr_blocks = ["0.0.0.0/0"] # Allows SSH from any IP address
   }
-  
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
 
   tags = {
     Name = "allow_tls"
@@ -106,6 +100,10 @@ resource "aws_vpc_security_group_ingress_rule" "sg_ipv4" {
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
+
+  tags = {
+    Name = "myingresstraffic"
+  }
 }
 
 
@@ -114,18 +112,23 @@ resource "aws_vpc_security_group_egress_rule" "sg_egress" {
   security_group_id = aws_security_group.sg.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" # semantically equivalent to all ports
+
+  tags = {
+    Name = "myegresstraffic"
+  }
 }
 
 
 
 resource "aws_instance" "instance1" {
-  ami               = "ami-084568db4383264d4"
-  instance_type     = "t2.micro"
-  availability_zone = "us-east-1b"
-  key_name          = "test-key"
-  security_groups   = [aws_security_group.sg.id]
-  subnet_id         = aws_subnet.mysubnet.id
-  count             = "1"
+  ami                         = "ami-084568db4383264d4"
+  instance_type               = "t2.micro"
+  availability_zone           = "us-east-1c"
+  key_name                    = "test-key"
+  security_groups             = [aws_security_group.sg.id]
+  subnet_id                   = aws_subnet.mysubnet.id
+  count                       = "1"
+  associate_public_ip_address = true
 
   tags = {
     Name = "MyEC2Instance"
