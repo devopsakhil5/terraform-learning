@@ -71,3 +71,23 @@ resource "aws_route_table_association" "rta" {
   route_table_id = aws_route_table.rt.id
 }
 
+resource "aws_key_pair" "testkey" {
+  key_name   = "test-key"
+  public_key = var.pub_key
+}
+
+#resource "aws_instance" "instance1" {
+#  ami           = "ami-084568db4383264d4" # Replace with your desired AMI ID
+# instance_type = "t2.micro"              # Change the instance type if needed
+
+#key_name = "your-key-pair" # Replace with the name of your key pair in AWS
+
+# security_groups = ["your-security-group"] # Replace with your security group name
+
+# tags = {
+#  Name = "MyEC2Instance"
+# }
+
+# Optionally, add other configurations like EBS volume, user data, etc.
+#}
+

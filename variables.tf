@@ -9,3 +9,9 @@ variable "AWS_SECRET_ACCESS_KEY" {
 variable "REGION" {
   type = string
 }
+
+variable "pub_key" {
+  type        = string
+  description = "It is the public key generated on the local machine"
+
+}
