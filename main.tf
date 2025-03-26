@@ -76,18 +76,60 @@ resource "aws_key_pair" "testkey" {
   public_key = var.pub_key
 }
 
-#resource "aws_instance" "instance1" {
-#  ami           = "ami-084568db4383264d4" # Replace with your desired AMI ID
-# instance_type = "t2.micro"              # Change the instance type if needed
+resource "aws_security_group" "sg" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic and all outbound traffic"
+  vpc_id      = aws_vpc.myvpc.id
+  
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Allows SSH from any IP address
+  }
+  
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#key_name = "your-key-pair" # Replace with the name of your key pair in AWS
+  tags = {
+    Name = "allow_tls"
+  }
+}
 
-# security_groups = ["your-security-group"] # Replace with your security group name
+resource "aws_vpc_security_group_ingress_rule" "sg_ipv4" {
+  security_group_id = aws_security_group.sg.id
+  cidr_ipv4         = aws_vpc.myvpc.cidr_block
+  from_port         = 443
+  ip_protocol       = "tcp"
+  to_port           = 443
+}
 
-# tags = {
-#  Name = "MyEC2Instance"
-# }
 
-# Optionally, add other configurations like EBS volume, user data, etc.
-#}
+
+resource "aws_vpc_security_group_egress_rule" "sg_egress" {
+  security_group_id = aws_security_group.sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
+
+
+
+resource "aws_instance" "instance1" {
+  ami               = "ami-084568db4383264d4"
+  instance_type     = "t2.micro"
+  availability_zone = "us-east-1b"
+  key_name          = "test-key"
+  security_groups   = [aws_security_group.sg.id]
+  subnet_id         = aws_subnet.mysubnet.id
+  count             = "1"
+
+  tags = {
+    Name = "MyEC2Instance"
+  }
+
+}
 
