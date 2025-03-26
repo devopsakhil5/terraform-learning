@@ -41,8 +41,8 @@ resource "aws_vpc" "myvpc" {
 }
 
 resource "aws_subnet" "mysubnet" {
-  vpc_id     = aws_vpc.myvpc.id
-  cidr_block = "10.0.0.0/24"
+  vpc_id            = aws_vpc.myvpc.id
+  cidr_block        = "10.0.0.0/24"
   availability_zone = "us-east-1a"
 
   tags = {
@@ -136,4 +136,6 @@ resource "aws_instance" "instance1" {
   }
 
 }
+
+
 
