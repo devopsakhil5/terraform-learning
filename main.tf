@@ -43,6 +43,7 @@ resource "aws_vpc" "myvpc" {
 resource "aws_subnet" "mysubnet" {
   vpc_id     = aws_vpc.myvpc.id
   cidr_block = "10.0.0.0/24"
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "mysubnet"
@@ -123,7 +124,7 @@ resource "aws_vpc_security_group_egress_rule" "sg_egress" {
 resource "aws_instance" "instance1" {
   ami                         = "ami-084568db4383264d4"
   instance_type               = "t2.micro"
-  availability_zone           = "us-east-1c"
+  availability_zone           = "us-east-1a"
   key_name                    = "test-key"
   security_groups             = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.mysubnet.id
