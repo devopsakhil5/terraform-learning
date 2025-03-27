@@ -89,6 +89,20 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"] # Allows SSH from any IP address
   }
 
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allows SSH from any IP address
+  }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allows SSH from any IP address
+  }
+
 
   tags = {
     Name = "allow_tls"
@@ -130,6 +144,23 @@ resource "aws_instance" "instance1" {
   subnet_id                   = aws_subnet.mysubnet.id
   count                       = "1"
   associate_public_ip_address = true
+
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt update 
+              curl -fsSL https://get.docker.com -o install-docker.sh
+              cat install-docker.sh
+              sh install-docker.sh --dry-run
+              sudo sh install-docker.sh
+              sleep 15
+              sudo docker --version
+              sudo systemctl start docker
+              sudo systemctl enable docker
+              sleep 30
+              sudo docker run --name java -it -d openjdk
+              sleep 15
+              sudo docker run --name jenkins -p 8080:8080 jenkins/jenkins
+              EOF
 
   tags = {
     Name = "MyEC2Instance"
