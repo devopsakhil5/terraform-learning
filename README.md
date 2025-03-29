@@ -103,14 +103,16 @@ The user data script automates the following tasks:
 5. Runs a Jenkins server in a Docker container.
 
 **Project Structure:**
+```
 ├── main.tf           # Main Terraform configuration file
 ├── variables.tf      # Terraform variables
 ├── outputs.tf        # Terraform output values
 ├── user_data.sh      # Bash script for EC2 instance configuration
 ├── Jenkinsfile       # Jenkins pipeline definition
 ├── README.md         # This file
+```
 
-git **Automation and Security:**
+**Automation and Security:**
 1. Jenkins Pipeline: Automates Terraform stages (init, fmt, validate, plan, apply).
 2. Manual Plan Approval (MPA): Enhances security by requiring human review before deployment.
 3. Version Control: GitHub ensures version control and rollback capabilities.
