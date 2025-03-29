@@ -43,6 +43,7 @@ graph TD
     T --> U[Wait for Java Application];
     U --> V[Jenkins Docker Container];
     H -- Rejected --> W[Pipeline Abort];
+```
 
 ## Prerequisites
 1. AWS Account: An active AWS account with necessary permissions.
@@ -56,8 +57,8 @@ Getting Started
 1. Clone the Repository:
 
 **Bash**
-
-```git clone <repository_url>
+```
+1. git clone <repository_url>
 cd <repository_name>
 
 2. Configure AWS Credentials:```
@@ -82,6 +83,7 @@ cd <repository_name>
 
 8. Access Deployed Resources:
 - Retrieve the EC2 instance's public IP and access the deployed Java and Jenkins applications.
+```
 
 **Terraform Resources:**
 IAM: Secure IAM roles and policies.
