@@ -110,7 +110,7 @@ The user data script automates the following tasks:
 ├── Jenkinsfile       # Jenkins pipeline definition
 ├── README.md         # This file
 
-**Automation and Security:**
+git **Automation and Security:**
 1. Jenkins Pipeline: Automates Terraform stages (init, fmt, validate, plan, apply).
 2. Manual Plan Approval (MPA): Enhances security by requiring human review before deployment.
 3. Version Control: GitHub ensures version control and rollback capabilities.
