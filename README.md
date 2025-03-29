@@ -45,6 +45,7 @@ This project automates the creation and management of AWS resources, including I
 ```
 
 ## Prerequisites:
+
 1. AWS Account: An active AWS account with necessary permissions.
 2. AWS CLI: Configured AWS CLI.
 3. Terraform: Installed and configured.
@@ -52,33 +53,36 @@ This project automates the creation and management of AWS resources, including I
 5. GitHub Repository: A GitHub repository to store the Terraform code and Jenkins pipeline.
 6. GitHub Codespaces (Recommended): For a consistent and pre-configured development environment.
 
-Getting Started
+**Getting Started**:
+
 1. Clone the Repository:
 `- git clone <repository_url>`
 `- cd <repository_name>`
 
-1. Configure AWS Credentials:
+2. Configure AWS Credentials:
 `- Set up AWS credentials in Jenkins and/or GitHub Codespaces.`
 
-1. Initialize Terraform (Jenkins Pipeline):
+3. Initialize Terraform (Jenkins Pipeline):
 `- The Jenkins pipeline will automatically execute terraform init.`
 
-1. Review and Modify Terraform Variables (Optional):
+4. Review and Modify Terraform Variables (Optional):
 `- Modify variables.tf or create terraform.tfvars to customize the deployment.`
 
-1. GitHub Commit and Jenkins Pipeline Trigger:
+5. GitHub Commit and Jenkins Pipeline Trigger:
 `- Commit changes to the GitHub repository to trigger the Jenkins pipeline.`
 `- The pipeline will execute terraform fmt, terraform validate, and terraform plan.`
 
-1. Manual Plan Approval (MPA):
+6. Manual Plan Approval (MPA):
 `- Jenkins will pause for manual approval after the terraform plan stage.`
 `- Review the plan and approve or reject the deployment.`
 
-1. Apply Terraform Configuration (Jenkins Pipeline):
+7. Apply Terraform Configuration (Jenkins Pipeline):
 `- Upon approval, Jenkins will execute terraform apply to provision the AWS resources.`
 
-1. Access Deployed Resources:
+8. Access Deployed Resources:
 `- Retrieve the EC2 instance's public IP and access the deployed Java and Jenkins applications.`
+
+
 
 **Terraform Resources:**
 - IAM: Secure IAM roles and policies.
