@@ -1,13 +1,13 @@
 
-# AWS Infrastructure Automation with Terraform, Docker, Jenkins, and GitHub Pipelines
+# AWS Infrastructure Automation with Terraform, Docker, Jenkins, and GitHub Pipelines:
 
 This repository showcases a comprehensive automation pipeline for deploying AWS infrastructure, leveraging Terraform, Docker, Jenkins, and GitHub. The project originated from a hands-on, learn-by-doing approach, where manual experimentation transitioned into a fully automated, secure, and version-controlled deployment process.
 
-## Project Overview
+## Project Overview:
 
 This project automates the creation and management of AWS resources, including IAM roles, VPC networking, EC2 instances, and containerized applications (Java and Jenkins), using Terraform and Bash scripting. It emphasizes security best practices and implements a robust CI/CD pipeline through Jenkins, triggered by GitHub commits.
 
-### Key Components
+### Key Components:
 
 * **Terraform:** Infrastructure as Code (IaC) for AWS resource provisioning.
 * **AWS Services:** IAM, VPC, Subnets, Internet Gateway, Route Tables, Security Groups, EC2.
@@ -19,15 +19,14 @@ This project automates the creation and management of AWS resources, including I
 
 ## Architecture
 
-```mermaid
-graph TD
+```graph TD
     A[GitHub Commit] --> B(Jenkins Pipeline Trigger);
     B --> C{Terraform Stages};
     C --> D[Terraform Init];
     D --> E[Terraform Fmt];
     E --> F[Terraform Validate];
     F --> G[Terraform Plan];
-    G --> H{Manual Plan Approval (MPA)};
+    G --> H[Manual Plan Approval (MPA)];
     H -- Approved --> I[Terraform Apply];
     I --> J[AWS IAM];
     I --> K[AWS VPC];
@@ -36,17 +35,17 @@ graph TD
     I --> N[AWS Route Tables];
     I --> O[AWS Security Groups];
     I --> P[AWS EC2 Instance];
-    P --> Q{User Data Script};
+    P --> Q[User Data Script];
     Q --> R[Update Repository];
     Q --> S[Install Docker];
     S --> T[Java Docker Container];
     T --> U[Wait for Java Application];
     U --> V[Jenkins Docker Container];
     H -- Rejected --> W[Pipeline Abort];
-
 ```
 
-## Prerequisites
+## Prerequisites:
+
 1. AWS Account: An active AWS account with necessary permissions.
 2. AWS CLI: Configured AWS CLI.
 3. Terraform: Installed and configured.
@@ -55,44 +54,45 @@ graph TD
 6. GitHub Codespaces (Recommended): For a consistent and pre-configured development environment.
 
 **Getting Started**:
-```
+
 1. Clone the Repository:
-- git clone <repository_url>
-- cd <repository_name>
+`- git clone <repository_url>`
+`- cd <repository_name>`
 
 2. Configure AWS Credentials:
-- Set up AWS credentials in Jenkins and/or GitHub Codespaces.
+`- Set up AWS credentials in Jenkins and/or GitHub Codespaces.`
 
 3. Initialize Terraform (Jenkins Pipeline):
-- The Jenkins pipeline will automatically execute terraform init.
+`- The Jenkins pipeline will automatically execute terraform init.`
 
 4. Review and Modify Terraform Variables (Optional):
-- Modify variables.tf or create terraform.tfvars to customize the deployment.
+`- Modify variables.tf or create terraform.tfvars to customize the deployment.`
 
 5. GitHub Commit and Jenkins Pipeline Trigger:
-- Commit changes to the GitHub repository to trigger the Jenkins pipeline.
-- The pipeline will execute terraform fmt, terraform validate, and terraform plan.
+`- Commit changes to the GitHub repository to trigger the Jenkins pipeline.`
+`- The pipeline will execute terraform fmt, terraform validate, and terraform plan.`
 
 6. Manual Plan Approval (MPA):
-- Jenkins will pause for manual approval after the terraform plan stage.
-- Review the plan and approve or reject the deployment.
+`- Jenkins will pause for manual approval after the terraform plan stage.`
+`- Review the plan and approve or reject the deployment.`
 
 7. Apply Terraform Configuration (Jenkins Pipeline):
-- Upon approval, Jenkins will execute terraform apply to provision the AWS resources.
+`- Upon approval, Jenkins will execute terraform apply to provision the AWS resources.`
 
 8. Access Deployed Resources:
-- Retrieve the EC2 instance's public IP and access the deployed Java and Jenkins applications.
-```
+`- Retrieve the EC2 instance's public IP and access the deployed Java and Jenkins applications.`
+
+
 
 **Terraform Resources:**
-IAM: Secure IAM roles and policies.
-VPC: Isolated virtual network.
-Subnets: Public subnets for EC2 instances.
-Internet Gateway: Internet connectivity for the VPC.
-Route Tables: Network routing configuration.
-Security Groups: Ingress and egress traffic control.
-EC2 Instance: Compute instance with user data script.
-IAM Policy Attachments: Attaching necessary policies to IAM roles.
+- IAM: Secure IAM roles and policies.
+- VPC: Isolated virtual network.
+- Subnets: Public subnets for EC2 instances.
+- Internet Gateway: Internet connectivity for the VPC.
+- Route Tables: Network routing configuration.
+- Security Groups: Ingress and egress traffic control.
+- EC2 Instance: Compute instance with user data script.
+- IAM Policy Attachments: Attaching necessary policies to IAM roles.
 
 **User Data Script (Bash):**
 The user data script automates the following tasks:
