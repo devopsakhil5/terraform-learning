@@ -43,6 +43,7 @@ graph TD
     T --> U[Wait for Java Application];
     U --> V[Jenkins Docker Container];
     H -- Rejected --> W[Pipeline Abort];
+
 ```
 
 ## Prerequisites
@@ -53,15 +54,13 @@ graph TD
 5. GitHub Repository: A GitHub repository to store the Terraform code and Jenkins pipeline.
 6. GitHub Codespaces (Recommended): For a consistent and pre-configured development environment.
 
-Getting Started
-1. Clone the Repository:
-
-**Bash**
+**Getting Started**:
 ```
-1. git clone <repository_url>
-cd <repository_name>
+1. Clone the Repository:
+- git clone <repository_url>
+- cd <repository_name>
 
-2. Configure AWS Credentials:```
+2. Configure AWS Credentials:
 - Set up AWS credentials in Jenkins and/or GitHub Codespaces.
 
 3. Initialize Terraform (Jenkins Pipeline):
