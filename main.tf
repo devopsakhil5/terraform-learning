@@ -152,14 +152,15 @@ resource "aws_instance" "instance1" {
               cat install-docker.sh
               sh install-docker.sh --dry-run
               sudo sh install-docker.sh
-              sleep 15
+              sleep 25
               sudo docker --version
               sudo systemctl start docker
               sudo systemctl enable docker
-              sleep 30
+              sleep 50
               sudo docker run --name java -it -d openjdk
-              sleep 15
+              sleep 35
               sudo docker run --name jenkins -p 8080:8080 jenkins/jenkins
+              sleep 35
               EOF
 
   tags = {
